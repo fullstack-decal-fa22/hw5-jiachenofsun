@@ -1,7 +1,7 @@
-import {_________} from "react";
+import {useState} from "react";
 import axios from "axios";
 
-const NewPost = ({ _________ }) => {
+const NewPost = ( props ) => {
   const [id, setId] = useState();
   const [title, setTitle] = useState();
   const [body, setBody] = useState();
@@ -13,9 +13,17 @@ const NewPost = ({ _________ }) => {
       body
     })
 
-    axios.post(_________, _________).then(_________);
+    axios.post("http://localhost:3002/post", {
+      id,
+      title,
+      body
+    }).then(function (response) {
+      const n = props.curr.concat([response.data])
+      props.func(n)
+    })
+    .catch((error) => console.log(error));
   }
-
+// props.func(response.data)
   return <div>
     <div>
       <input type="text" placeholder="ID" value={id} onChange={e => setId(e.target.value)} />

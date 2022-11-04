@@ -36,6 +36,7 @@ app.get('/posts', (req, res) => {
 })
 
 app.post('/post', (req, res) => {
+  console.log(req)
   if (data[req.body.id]) {
     throw new Error("Post exists!")
   }
